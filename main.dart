@@ -6,6 +6,7 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp( // Root widget
@@ -18,13 +19,37 @@ class MyApp extends StatelessWidget {
             builder: (context) {
               return Column(
                 children: [
-                  const Text('Hello, World!'),
+                  const Text(
+                    'Flutter',
+                    style: TextStyle(fontSize: 80),
+
+                  ),
                   const SizedBox(height: 20),
+                  TextField(
+  decoration: const InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Email',
+    hintText: 'silahkan masukkan email anda'
+  ),
+),
+TextField(
+  decoration: const InputDecoration(
+    border: OutlineInputBorder(),
+    labelText: 'Password',
+    hintText: 'silahkan masukkan password anda'
+  ),
+),
+const SizedBox(height: 15,),
+const Text("forgot password?",
+style: TextStyle(color: Colors.blueAccent),
+),
+const SizedBox(height: 15,),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.blueAccent),
                     onPressed: () {
                       print('Click!');
                     },
-                    child: const Text('A button'),
+                    child: const Text('Login'),
                   ),
                 ],
               );
