@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp( // Root widget
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('My Home Page'),
+          title: const Text('login Page'),
         ),
         body: Center(
           child: Builder(
@@ -21,8 +21,7 @@ class MyApp extends StatelessWidget {
                 children: [
                   const Text(
                     'Flutter',
-                    style: TextStyle(fontSize: 80),
-
+                    style: TextStyle(fontSize: 80 ,color: Colors.blueAccent , ),
                   ),
                   const SizedBox(height: 20),
                   TextField(
@@ -51,6 +50,12 @@ const SizedBox(height: 15,),
                     },
                     child: const Text('Login'),
                   ),
+
+                  Container(
+                    margin: EdgeInsets.all(100),
+                    child: const Text('new user? get account'),
+                  ),
+
                 ],
               );
             },
