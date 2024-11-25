@@ -1,189 +1,71 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    const String appTitle = 'Flutter layout demo';
     return MaterialApp(
-      title: appTitle,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(appTitle),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxPo5aIFamyta6kVbqkVZV2vv3eqqVb_uC8A&s"),
-              const TitleSection(
-                name: 'pemandangan alam', 
-                location: 'malang',
+      home: DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Color(0xFF075E54),
+            title: Text('WhatsApp'),
+            actions: <Widget>[
+              IconButton(icon: Icon(Icons.search), onPressed: () {}),
+              IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+            ],
+            bottom: TabBar(
+              indicatorColor: const Color.fromARGB(255, 0, 0, 0),
+              indicatorWeight: 6.0,
+              labelPadding: EdgeInsets.all(10.0),
+              tabs: <Widget>[
+                Icon(Icons.camera_alt),
+                Text('CHAT'),
+                Text('STATUS'),
+                Text('PANGGILAN'),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              Center(child: Text('camera')),
+              ListTile(
+                leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Image(
+                        image: NetworkImage(
+                            'https://tse2.mm.bing.net/th?id=OIP.JDeenRTcjzJjnbsVjjr5QwHaE8&pid=Api&P=0&h=220'))),
+                title: Text('+62-878-5501-6654'),
+                subtitle: Text('Apakah besok ada info?'),
+                trailing: Text(
+                  '18.05',
+                  style: TextStyle(fontSize: 12.0),
+                ),
               ),
-              ButtonSection(),
-              TextSection(
-                description:
-                  'di malang selatan memiliki berbagai macam pantai yang sangat indah',
-              ),
+              Center(child: Text('Status')),
+              ListTile(
+                leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(50.0),
+                    child: Image(
+                        image: NetworkImage(
+                            'https://tse2.mm.bing.net/th?id=OIP.JDeenRTcjzJjnbsVjjr5QwHaE8&pid=Api&P=0&h=220'))),
+                title: Text('+62-878-5501-6654'),
+                subtitle: Row(
+                  children: <Widget>[
+                    Icon(Icons.arrow_back, size: 16.0, color: Colors.green),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text('Kemarin 21.25')),
+                  ],
+                ),
+                trailing: Icon(Icons.call, color: Colors.green),
+              )
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class TitleSection extends StatelessWidget {
-  const TitleSection({
-    super.key,
-    required this.name,
-    required this.location,
-  });
-
-  final String name;
-  final String location;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    name,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  location,
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /*3*/
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          const Text('19'),
-        ],
-      ),
-    );
-  }
-}
-
-class ButtonSection extends StatelessWidget {
-  const ButtonSection({super.key});
-  // ···
-  @override
-  Widget build(BuildContext context) {
-    final Color color = Theme.of(context).primaryColor;
-    return SizedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ButtonWithText(
-            color: color,
-            icon: Icons.call,
-            label: 'CALL',
-          ),
-          ButtonWithText(
-            color: color,
-            icon: Icons.near_me,
-            label: 'ROUTE',
-          ),
-          ButtonWithText(
-            color: color,
-            icon: Icons.share,
-            label: 'SHARE',
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ButtonWithText extends StatelessWidget {
-  const ButtonWithText({
-    super.key,
-    required this.color,
-    required this.icon,
-    required this.label,
-  });
-
-  final Color color;
-  final IconData icon;
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class TextSection extends StatelessWidget {
-  const TextSection({
-    super.key,
-    required this.description,
-  });
-
-  final String description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(32),
-      child: Text(
-        description,
-        softWrap: true,
-      ),
-    );
-  }
-}
-class ImageSection extends StatelessWidget {
-  const ImageSection({super.key, required this.image});
-
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(
-      image,
-      width: 600,
-      height: 240,
-      fit: BoxFit.cover,
     );
   }
 }
